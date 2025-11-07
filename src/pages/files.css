@@ -1,0 +1,204 @@
+.container1{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.uploadFileContainer{
+    border: solid 1px #3892c6;
+    border-radius: 10px;
+    padding: 20px 60px;
+    margin-top: 15px;
+    width: 60%;
+}
+
+.uploadFileContainer h3{
+    color: #3892c6;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+#inputGroupFileAddon04:hover{
+    color: white;
+    background-color: #3892c6;
+}
+
+.listOfFilesContainer {
+  border: 1px solid #3892c6;
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 20px 60px;
+  width: 60%;
+  box-sizing: border-box;
+}
+
+/* Scroll container */
+.tableScrollContainer {
+  max-height: 400px;      /* limit height */
+  overflow-y: auto;       /* enable vertical scroll */
+  overflow-x: auto;       /* optional: allow horizontal scroll if needed */
+}
+
+/* Sticky table header */
+.tableScrollContainer thead th {
+  position: sticky;
+  top: 0;
+  background: white;      /* prevent text blending with content */
+  z-index: 2;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05); /* subtle divider shadow */
+}
+
+/* Optional: keep full table width */
+.tableScrollContainer table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+/* Change the "Files" header color */
+.listOfFilesContainer th:first-child {
+  color: #3892c6;
+}
+
+/* Align the second column (View button) to the right */
+.listOfFilesContainer td:last-child,
+.listOfFilesContainer th:last-child {
+  text-align: right;
+}
+
+.fileActions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px; /* space between View and Delete */
+}
+
+
+/* New Delete button styles */
+.deleteFileButton {
+  color: #d9534f; /* Bootstrap-like red */
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.deleteFileButton:hover {
+  color: #f5b7b1; /* lighter red on hover */
+}
+
+
+.viewFileButton{
+    color: #3892c6;
+}
+
+.viewFileButton:hover{
+    color: #d7e9f5;
+    cursor: pointer;
+}
+
+.fileViewerContainer {
+  border: solid 1px #3892c6;
+  border-radius: 10px;
+  margin: 20px 0px;
+  padding: 20px 60px;
+  width: 80%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.fileViewerContainer h3{
+    color: #3892c6;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.tableScrollContainer {
+  flex-grow: 1;
+  overflow: auto;
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+/* Optional: make table headers sticky */
+.tableScrollContainer thead th {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+}
+
+
+/* Toast container fixed top-right */
+.toast-container-ct {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none; /* click-through except buttons */
+}
+
+/* Toast box */
+.app-toast {
+  pointer-events: auto;
+  min-width: 220px;
+  max-width: 420px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  overflow: hidden;
+  font-size: 0.95rem;
+  animation: toastIn 200ms ease;
+}
+
+/* body */
+.app-toast .toast-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+}
+
+/* variants */
+.toast-info {
+  background: #f3f6ff;
+  color: #0b3a8a;
+}
+
+.toast-success {
+  background: #e6ffef;
+  color: #0e6633;
+}
+
+.toast-error {
+  background: #fff0f0;
+  color: #8a0b0b;
+}
+
+/* close button */
+.toast-close {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* entrance */
+@keyframes toastIn {
+  from { transform: translateY(-8px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* keep table horizontally scrollable if wide */
+.tableScrollContainer {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+/* if you'd like the active file row highlighted */
+.table-active {
+  background-color: #f0f8ff !important;
+}

@@ -1,0 +1,166 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    padding-bottom: 0px;
+    margin-top: 20px;
+}
+
+#dataVisTitle{
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 50px;
+    color:#3892c6;
+    padding: 0px 20px;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+
+}
+
+.tableTitle{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    color:#3892c6;
+    margin-top: 20px;
+
+}
+
+.sectionDescription{
+    padding: 20px;
+    border-radius: 10px;
+    color: #3892c6;
+    text-align: center;
+    width: 60%;
+    font-size: 20px;
+    margin-top: 20px;
+    padding-bottom: 0px;
+}
+
+.blueSection{
+    background-color: #3892c6;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.pBlueSection{
+    color: #d7e9f5;
+}
+
+.numberOfEmigrants, .sex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.demographics, .educationOccupation, .originDestination{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+.age, .civilStatus, .education, .occupation, .sex{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.age2{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+.originDestination{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+}
+
+.origin{
+    width: 45%;
+    margin: 0px 20px;
+}
+
+.destination{
+    width: 55%;
+    margin: 0px 20px;
+}
+
+.ageLineGraph, .ageBarChart{
+    width: 50%;
+    margin: 0px 20px;
+}
+
+.biggerChart{
+    width: 60%;
+    margin: 0px 20px;
+}
+
+.smallerChart{
+    width: 40%;
+    margin: 0px 20px;
+}
+
+.UnVsEmployed{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    align-self: center;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+input[type="range"] {
+  width: 200px;
+  margin-right: 10px;
+}
+
+input[type="number"] {
+  width: 80px;
+  text-align: center;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: solid #3892c6 1px;
+}
+
+input[type="number"]:focus,
+input[type="range"]:focus {
+  outline: none;
+  border-color: #5f9ea0;
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
