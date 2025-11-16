@@ -214,8 +214,11 @@ const CivilStatusStackedBarChart = () => {
         {!loading && !dataAvailable ? (
           <p>Data is not available</p>
         ) : (
-          <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={loading ? [] : getFilteredData()}>
+          <ResponsiveContainer width="100%" height={450}>
+            <BarChart 
+              data={loading ? [] : getFilteredData()}
+              margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+            >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="year" />
               <YAxis
@@ -224,7 +227,14 @@ const CivilStatusStackedBarChart = () => {
                 label={{ value: 'Percentage', angle: -90, position: 'insideLeft' }}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Legend />
+              <Legend 
+                wrapperStyle={{ 
+                  paddingTop: '20px',
+                  paddingBottom: '10px'
+                }}
+                iconSize={14}
+                iconType="square"
+              />
               {Object.keys(selectedCategories).map((category) =>
                 selectedCategories[category] && category !== "Others" ? (
                   <Bar

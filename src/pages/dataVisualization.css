@@ -1,3 +1,6 @@
+/* Import modern fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
 .mainContainer{
     display: flex;
     flex-direction: column;
@@ -17,36 +20,81 @@
 
 #dataVisTitle{
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 50px;
-    color:#3892c6;
+    font-weight: 700;
+    color:#d32f2f;
     padding: 0px 20px;
     padding-bottom: 0px;
     margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
 
+#source {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+}
+
+#source a {
+    color: #d32f2f;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+#source a:hover {
+    color: #c62828;
+    text-decoration: underline;
 }
 
 .tableTitle{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 20px;
-    color:#3892c6;
+    font-weight: 600;
+    color:#d32f2f;
     margin-top: 20px;
-
+    letter-spacing: -0.3px;
 }
 
 .sectionDescription{
-    padding: 20px;
-    border-radius: 10px;
-    color: #3892c6;
+    padding: 25px 35px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #fff0f0 0%, #ffe6e6 100%);
+    border-left: 5px solid #d32f2f;
+    box-shadow: 0 4px 6px rgba(211, 47, 47, 0.1);
+    color: #7a2c2c;
     text-align: center;
     width: 60%;
-    font-size: 20px;
-    margin-top: 20px;
-    padding-bottom: 0px;
+    font-size: 18px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-bottom: 25px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.sectionDescription:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(211, 47, 47, 0.15);
+}
+
+.sectionDescription::before {
+    font-size: 24px;
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: white;
+    padding: 0 10px;
+    border-radius: 50%;
 }
 
 .blueSection{
-    background-color: #3892c6;
+    background-color: #d32f2f;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -54,7 +102,29 @@
 }
 
 .pBlueSection{
-    color: #d7e9f5;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Special styling for description text in red section */
+.blueSection .sectionDescription {
+    background: rgba(255, 255, 255, 0.15);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-left: 5px solid #ffffff;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blueSection .sectionDescription:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.blueSection .sectionDescription::before {
+    background: #d32f2f;
+    color: white;
 }
 
 .numberOfEmigrants, .sex{
@@ -149,18 +219,52 @@ input[type="number"] {
   width: 80px;
   text-align: center;
   font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
   padding: 5px 10px;
   border-radius: 10px;
-  border: solid #3892c6 1px;
+  border: solid #d32f2f 1px;
 }
 
 input[type="number"]:focus,
 input[type="range"]:focus {
   outline: none;
-  border-color: #5f9ea0;
+  border-color: #c62828;
 }
 
 label {
   font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
   margin-bottom: 10px;
+  color: #333;
+}
+
+/* Additional enhancements for better typography */
+span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+/* Improve button typography if needed */
+.btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+/* Modal typography */
+.modal-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+}
+
+.modal-body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Ensure smooth font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }

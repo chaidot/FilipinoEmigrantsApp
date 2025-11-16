@@ -16,10 +16,10 @@
 
 .signButton{
     cursor: pointer;
-    color: #3892c6;
+    color: #d32f2f;
 }
 
 .signButton:hover{
     cursor: pointer;
-    color: #226891;
+    color: #c62828;
 }

@@ -1,16 +1,13 @@
 import React from "react";
-import { FaBars, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./components.css"; // import the CSS file
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-export default function Topbar({ currentPage }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
-
+export default function Sidebar({ currentPage }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   const [pageName, setPageName] = useState("Home");
 
@@ -33,57 +30,71 @@ export default function Topbar({ currentPage }) {
     }
   }, [location.pathname]);
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
 
   return (
-    <header className="topbar">
-      {/* Left - Menu */}
-      <div className="menu-container">
-        <div className="dropdown">
-            <button
-                onClick={() => setMenuOpen((prev) => !prev)}
-                className="icon-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-            >
-            <FaBars className="option"/>
-            </button>
+    <>
+      {/* Top bar with hamburger and page title */}
+      <header className="topbar-new">
+        <button onClick={toggleSidebar} className="hamburger-btn">
+          <FaBars />
+        </button>
+        <h1 className="page-title-new">{pageName}</h1>
+      </header>
 
-            <ul className="dropdown-menu">
-                <li className="menuOptions">
-                <NavLink to="/" className="dropdown-item nav-link-custom menuOptionContainer" onClick={() => {setMenuOpen(false), setPageName("Home")}}>
-                  <i class="bi bi-house-door menuName"></i>
-                  Home
-                </NavLink>
-                </li>
-                <li className="menuOptions">
-                <NavLink to="/files" className="dropdown-item nav-link-custom menuOptionContainer" onClick={() => {setMenuOpen(false), setPageName("Files")}}>
-                  <i class="bi bi-archive menuName"></i>
-                    Files
-                </NavLink>
-                </li>
-                <li className="menuOptions">
-                <NavLink to="/dataVisualization" className="dropdown-item nav-link-custom menuOptionContainer" onClick={() => {setMenuOpen(false), setPageName("Data Visualization")}}>
-                  <i class="bi bi-file-bar-graph menuName"></i>
-                    Data Visualization
-                </NavLink>
-                </li>
-                {/*
-                <li className="menuOptions">
-                <NavLink to="/option2" className="dropdown-item nav-link-custom" onClick={() => setMenuOpen(false)}>
-                    Option 2
-                </NavLink>
-                </li>
-                */}
-            </ul>
+      {/* Overlay */}
+      {sidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar}></div>}
+
+      {/* Sidebar */}
+      <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
+        <div className="sidebar-header">
+          <h2 className="sidebar-title">Menu</h2>
+          <button onClick={toggleSidebar} className="close-btn">
+            <FaTimes />
+          </button>
         </div>
-        
 
-        <p id="pageName">{pageName}</p>
+        <nav className="sidebar-nav">
+          <NavLink 
+            to="/" 
+            className={({ isActive }) => 
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }
+            onClick={closeSidebar}
+          >
+            <i className="bi bi-house-door sidebar-icon"></i>
+            <span>Home</span>
+          </NavLink>
 
-      </div>
-      {/* Right - Profile 
-      <div id="profile" className="menu-container">
-        <FaUserCircle />
-      </div>
-      */}
-    </header>
+          <NavLink 
+            to="/files" 
+            className={({ isActive }) => 
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }
+            onClick={closeSidebar}
+          >
+            <i className="bi bi-archive sidebar-icon"></i>
+            <span>Data Management</span>
+          </NavLink>
+
+          <NavLink 
+            to="/dataVisualization" 
+            className={({ isActive }) => 
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }
+            onClick={closeSidebar}
+          >
+            <i className="bi bi-file-bar-graph sidebar-icon"></i>
+            <span>Data Visualization</span>
+          </NavLink>
+        </nav>
+      </aside>
+    </>
   );
 }

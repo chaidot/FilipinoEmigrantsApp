@@ -42,7 +42,7 @@ export default function DataVisualization() {
     <>
       <div className="mainContainer">
         <div className="titleContainer">
-          <h1 id="dataVisTitle">Pinoy Emigration Trends</h1>
+          <h1 id="dataVisTitle">Filipino Emigration Trends</h1>
           <p id="source">File Source: <a href="https://data.gov.ph/index/public/resource/commission-of-filipino-overseas:-statistical-profile-of-registered-filipino-emigrants-%5B1981-2020%5D-/number-of-registered-filipino-emigrants-by-place-of-origin-in-the-philippines:-1988-2020/w3fgcanp-4ci6-36uv-ny9r-pvq0dwlyxl9x" target="_blank">Open Data Philippines</a></p>
         </div>
 

@@ -1,13 +1,157 @@
-/*NavBar Styling*/
+/* Top Bar Styling (New - Fixed at top) */
+.topbar-new {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #d32f2f;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
 
+.hamburger-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+}
+
+.hamburger-btn:hover {
+  opacity: 0.8;
+}
+
+.page-title-new {
+  margin: 0;
+  margin-left: 20px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 280px;
+  height: 100vh;
+  background-color: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+  transition: left 0.3s ease;
+  z-index: 1100;
+  overflow-y: auto;
+}
+
+.sidebar-open {
+  left: 0;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #d32f2f;
+  color: white;
+}
+
+.sidebar-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+}
+
+.close-btn:hover {
+  opacity: 0.8;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  padding: 20px 0;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: #424242;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-left: 4px solid transparent;
+}
+
+.sidebar-link:hover {
+  background-color: #fde3e3;
+  color: #d32f2f;
+  border-left-color: #d32f2f;
+}
+
+.sidebar-link.active {
+  background-color: #d32f2f;
+  color: white;
+  border-left-color: #c62828;
+}
+
+.sidebar-link.active:hover {
+  background-color: #c62828;
+}
+
+.sidebar-icon {
+  font-size: 1.25rem;
+  margin-right: 15px;
+  min-width: 20px;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  cursor: pointer;
+}
+
+/* Main content adjustment - add this to your main content wrapper */
+.main-content {
+  margin-top: 60px;
+  padding: 20px;
+}
+
+/* OLD TOPBAR STYLES - Keep these for backwards compatibility if needed */
 .topbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 40px;
-  background-color: #3892c6; /* Tailwind's blue-600 */
-  color: #d7e9f5;
+  background-color: #d32f2f;
+  color: #f5d7d7;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,9 +163,9 @@
 
 .page-title {
   font-weight: 600;
-  font-size: 1.125rem; /* text-lg */
-    color: white;
-    background-color: aqua;
+  font-size: 1.125rem;
+  color: white;
+  background-color: aqua;
 }
 
 .menu-container {
@@ -32,7 +176,7 @@
 }
 
 .icon-btn {
-  font-size: 1.1rem; /* text-2xl */
+  font-size: 1.1rem;
   background: none;
   border: none;
   cursor: pointer;
@@ -50,7 +194,7 @@
 
 .nav-link-custom {
   text-decoration: none;  
-  color: #3892c6;            
+  color: #424242;            
 }
 
 .menuOptions:hover{
@@ -61,7 +205,49 @@
   text-align: center;
   padding-left: 25px;
   padding-top: 20px;
-  
+  color: white;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+}
+
+/* Dropdown Item Styling */
+.dropdown-item {
+  padding: 10px 20px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #fde3e3 !important;
+  color: #d32f2f !important;
+}
+
+.dropdown-item:focus {
+  background-color: #fde3e3 !important;
+  color: #d32f2f !important;
+}
+
+/* Active/Selected Menu Item - RED THEME */
+.dropdown-item.active,
+.nav-link-custom.active {
+  background-color: #d32f2f !important;
+  color: white !important;
+}
+
+.dropdown-item.active:hover,
+.nav-link-custom.active:hover {
+  background-color: #c62828 !important;
+  color: white !important;
+}
+
+/* Active menu item icons */
+.nav-link-custom.active .menuName {
+  color: white;
 }
 
 .icon-btn:hover, .dropdown, .option{
@@ -89,12 +275,12 @@
 .tooltipCustom{
   background-color:white;
   border: solid grey 1px;
-  padding: 10px 15px; /* Padding around the content */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
-  font-size: 14px; /* Font size */
-  max-width: 250px; /* Maximum width */
-  white-space: pre-line; /* Allow line breaks in text */
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  max-width: 250px;
+  white-space: pre-line;
 }
 
 .labelCategoriesModal{
@@ -103,7 +289,7 @@
 }
 
 .modifyCategoriesButton{
-  color: #3892c6;
+  color: #d32f2f;
   text-decoration: underline;
   padding: 0px;
   margin: 0px;
@@ -111,16 +297,16 @@
 }
 
 .blueSectionButtons{
-  color: #d7e9f5;
+  color: #f5d7d7;
 }
 
 .modifyCategoriesButton:hover{
   cursor: pointer;
-  color: blue;
+  color: #c62828;
 }
 
 .blueSectionChart{
-  background-color: #d7e9f5;
+  background-color: #f5d7d7;
   padding: 10px 10px;
   border-radius: 10px;
 }
@@ -142,21 +328,21 @@
   justify-content: space-between;
   margin-top: 10px;
   width: 20%;
-  color: #d7e9f5;
+  color: #f5d7d7;
 }
 
 .input-group .input-group-text {
   display: flex;
-  align-items: center; /* Aligns the label text vertically in the middle */
-  height: 38px; /* Make the label have the same height as the select input */
-  padding-top: 0; /* Remove any top padding from the label */
-  padding-bottom: 0; /* Remove any bottom padding from the label */
+  align-items: center;
+  height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .input-group .form-select {
-  height: 38px; /* Make the select element height match the label */
-  padding-top: 0; /* Remove any top padding from the select input */
-  padding-bottom: 0; /* Remove any bottom padding from the select input */
+  height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .yearSlider{
@@ -169,6 +355,3 @@
 #yearSliderLabel{
   padding: 0px 10px;
 }
-
-
-
