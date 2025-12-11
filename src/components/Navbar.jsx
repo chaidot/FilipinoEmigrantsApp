@@ -3,8 +3,8 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./components.css"; // import the CSS file
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default function Sidebar({ currentPage }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -21,6 +21,9 @@ export default function Sidebar({ currentPage }) {
         break;
       case "/dataVisualization":
         setPageName("Data Visualization");
+        break;
+      case "/forecast":               // 🔮 NEW
+        setPageName("Forecast");
         break;
       case "/option2":
         setPageName("Option 2");
@@ -49,10 +52,12 @@ export default function Sidebar({ currentPage }) {
       </header>
 
       {/* Overlay */}
-      {sidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar}></div>}
+      {sidebarOpen && (
+        <div className="sidebar-overlay" onClick={closeSidebar}></div>
+      )}
 
       {/* Sidebar */}
-      <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
+      <aside className={`sidebar ${sidebarOpen ? "sidebar-open" : ""}`}>
         <div className="sidebar-header">
           <h2 className="sidebar-title">Menu</h2>
           <button onClick={toggleSidebar} className="close-btn">
@@ -61,10 +66,10 @@ export default function Sidebar({ currentPage }) {
         </div>
 
         <nav className="sidebar-nav">
-          <NavLink 
-            to="/" 
-            className={({ isActive }) => 
-              `sidebar-link ${isActive ? 'active' : ''}`
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `sidebar-link ${isActive ? "active" : ""}`
             }
             onClick={closeSidebar}
           >
@@ -72,10 +77,10 @@ export default function Sidebar({ currentPage }) {
             <span>Home</span>
           </NavLink>
 
-          <NavLink 
-            to="/files" 
-            className={({ isActive }) => 
-              `sidebar-link ${isActive ? 'active' : ''}`
+          <NavLink
+            to="/files"
+            className={({ isActive }) =>
+              `sidebar-link ${isActive ? "active" : ""}`
             }
             onClick={closeSidebar}
           >
@@ -83,15 +88,27 @@ export default function Sidebar({ currentPage }) {
             <span>Data Management</span>
           </NavLink>
 
-          <NavLink 
-            to="/dataVisualization" 
-            className={({ isActive }) => 
-              `sidebar-link ${isActive ? 'active' : ''}`
+          <NavLink
+            to="/dataVisualization"
+            className={({ isActive }) =>
+              `sidebar-link ${isActive ? "active" : ""}`
             }
             onClick={closeSidebar}
           >
             <i className="bi bi-file-bar-graph sidebar-icon"></i>
             <span>Data Visualization</span>
+          </NavLink>
+
+          {/* 🔮 NEW: Forecasting link */}
+          <NavLink
+            to="/forecast"
+            className={({ isActive }) =>
+              `sidebar-link ${isActive ? "active" : ""}`
+            }
+            onClick={closeSidebar}
+          >
+            <i className="bi bi-graph-up-arrow sidebar-icon"></i>
+            <span>Forecasting</span>
           </NavLink>
         </nav>
       </aside>
