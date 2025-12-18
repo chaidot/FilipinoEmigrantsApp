@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import joblib
 
 from tensorflow.keras.models import Sequential
@@ -58,14 +58,18 @@ def load_data():
     # Drop incomplete rows & sort
     df = df.dropna(subset=["Year", "Male", "Female", "Total"])
     df = df.sort_values("Year").reset_index(drop=True)
+
+    # 👉 Exclude the COVID outlier year 2020 – train only up to 2019
+    df = df[df["Year"] <= 2019].reset_index(drop=True)
+
     return df
 
 
 def make_supervised(series: np.ndarray, window: int):
-    """Convert 1D time series into supervised learning samples."""
+    """Convert 1D time series into supervised learning samples (X: past window, y: next)."""
     X, y = [], []
     for i in range(len(series) - window):
-        X.append(series[i : i + window])
+        X.append(series[i: i + window])
         y.append(series[i + window])
     return np.array(X, dtype=np.float32), np.array(y, dtype=np.float32)
 
@@ -98,10 +102,10 @@ def main():
         )
 
         # ---------- MLP ----------
+        # Simpler models + stronger regularization to reduce overfitting on small data
         mlp_configs = [
-            {"hidden_layer_sizes": (32,), "alpha": 0.0001},
-            {"hidden_layer_sizes": (64, 32), "alpha": 0.0001},
-            {"hidden_layer_sizes": (64, 64), "alpha": 0.0005},
+            {"hidden_layer_sizes": (16,), "alpha": 0.001},
+            {"hidden_layer_sizes": (32,), "alpha": 0.001},
         ]
 
         best_mlp = None
@@ -131,10 +135,11 @@ def main():
         print(f"Saved best MLP to {mlp_path}")
 
         # ---------- LSTM ----------
+        # Smaller LSTM with stronger early stopping
         X_train_lstm = X_train.reshape((X_train.shape[0], WINDOW_SIZE, 1))
         X_val_lstm = X_val.reshape((X_val.shape[0], WINDOW_SIZE, 1))
 
-        lstm_units_candidates = [32, 64]
+        lstm_units_candidates = [16, 32]
         best_lstm = None
         best_lstm_val_loss = float("inf")
 
@@ -148,15 +153,15 @@ def main():
             )
             model.compile(optimizer="adam", loss="mse")
             es = EarlyStopping(
-                monitor="val_loss", patience=20, restore_best_weights=True
+                monitor="val_loss", patience=10, restore_best_weights=True
             )
 
             history = model.fit(
                 X_train_lstm,
                 y_train,
                 validation_data=(X_val_lstm, y_val),
-                epochs=200,
-                batch_size=8,
+                epochs=100,      # fewer epochs, early stopping will cut it earlier
+                batch_size=4,    # smaller batch for tiny dataset
                 verbose=0,
                 callbacks=[es],
             )
@@ -171,6 +176,48 @@ def main():
         lstm_path = os.path.join(MODELS_DIR, f"lstm_{attr_key}.h5")
         best_lstm.save(lstm_path)
         print(f"Saved best LSTM to {lstm_path}")
+
+        # ---------- Evaluate best models on validation set (in REAL counts) ----------
+        # y_val and predictions are currently in scaled units (thousands),
+        # so we rescale them to real emigrant counts for interpretability.
+
+        y_val_scaled = y_val
+
+        # MLP predictions (scaled)
+        y_pred_mlp_scaled = best_mlp.predict(X_val)
+
+        # LSTM predictions (scaled)
+        X_val_lstm_full = X_val.reshape((X_val.shape[0], WINDOW_SIZE, 1))
+        y_pred_lstm_scaled = best_lstm.predict(X_val_lstm_full).flatten()
+
+        # Convert back to real counts
+        y_val_real = y_val_scaled * SCALE_FACTOR
+        y_pred_mlp_real = y_pred_mlp_scaled * SCALE_FACTOR
+        y_pred_lstm_real = y_pred_lstm_scaled * SCALE_FACTOR
+
+        # ---- MLP metrics ----
+        mse_mlp = mean_squared_error(y_val_real, y_pred_mlp_real)
+        rmse_mlp = float(np.sqrt(mse_mlp))
+        mae_mlp = mean_absolute_error(y_val_real, y_pred_mlp_real)
+        r2_mlp = r2_score(y_val_real, y_pred_mlp_real)
+
+        # ---- LSTM metrics ----
+        mse_lstm = mean_squared_error(y_val_real, y_pred_lstm_real)
+        rmse_lstm = float(np.sqrt(mse_lstm))
+        mae_lstm = mean_absolute_error(y_val_real, y_pred_lstm_real)
+        r2_lstm = r2_score(y_val_real, y_pred_lstm_real)
+
+        print("\nValidation metrics (real counts):")
+        print(
+            f"  [{attr_key.upper()} - MLP ]  "
+            f"MSE={mse_mlp:.0f}, RMSE={rmse_mlp:.0f}, "
+            f"MAE={mae_mlp:.0f}, R^2={r2_mlp:.3f}"
+        )
+        print(
+            f"  [{attr_key.upper()} - LSTM]  "
+            f"MSE={mse_lstm:.0f}, RMSE={rmse_lstm:.0f}, "
+            f"MAE={mae_lstm:.0f}, R^2={r2_lstm:.3f}"
+        )
 
         print(
             f"Finished {attr_key}: "
